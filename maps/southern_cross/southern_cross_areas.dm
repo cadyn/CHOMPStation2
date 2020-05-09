@@ -147,7 +147,7 @@
 	icon_state = "unexplored_deep"
 
 
-
+/*Moving these to Space Station 13 areas_ch.dm because having them here messes with events for some reason.
 //Surface Outposts
 
 /area/surface/outpost
@@ -407,7 +407,7 @@
 /area/surface/outpost/main/bar
 	name = "\improper Main Outpost Bar"
 	icon_state = "bar"
-/*
+
 /area/surface/outpost/main/dorms
 	name = "\improper Main Outpost Dorms"
 
@@ -428,7 +428,7 @@
 
 /area/surface/outpost/main/dorms/dorm_6
 	name = "\improper Main Outpost Dorm Six"
-*/
+
 /area/surface/outpost/main/airlock
 	name = "\improper Main Outpost Airlock"
 	icon_state = "red"
@@ -557,6 +557,8 @@
 
 /area/outpost/mining_station/dock
 	name = "Mining Station Dock"
+//End of migration of areas to Space Station 13 areas_ch.dm
+*/
 
 //Turbolift
 
