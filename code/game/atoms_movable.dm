@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND|PIXEL_SCALE|KEEP_TOGETHER
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|KEEP_TOGETHER|LONG_GLIDE
 	glide_size = 8
 	var/last_move = null //The direction the atom last moved
 	var/anchored = 0
@@ -63,6 +63,10 @@
 
 	moveToNullspace()
 
+	vis_contents.Cut()
+	for(var/atom/movable/A as anything in vis_locs)
+		A.vis_contents -= src
+
 	if(pulledby)
 		pulledby.stop_pulling()
 
@@ -115,7 +119,8 @@
 				var/dest_z = get_z(newloc)
 
 				// Do The Move
-				glide_for(movetime)
+				if(movetime)
+					glide_for(movetime) // First attempt, lets let the diag do it.
 				loc = newloc
 				. = TRUE
 
@@ -157,7 +162,7 @@
 			// place due to a Crossed, Bumped, etc. call will interrupt
 			// the second half of the diagonal movement, or the second attempt
 			// at a first half if step() fails because we hit something.
-			glide_for(movetime)
+			glide_for(movetime * 2)
 			if (direct & NORTH)
 				if (direct & EAST)
 					if (step(src, NORTH) && moving_diagonally)
@@ -210,7 +215,7 @@
 
 	// If we moved, call Moved() on ourselves
 	if(.)
-		Moved(oldloc, direct, FALSE, movetime)
+		Moved(oldloc, direct, FALSE, movetime ? movetime : ( (TICKS2DS(WORLD_ICON_SIZE/glide_size)) * (moving_diagonally ? (0.5) : 1) ) )
 
 	// Update timers/cooldown stuff
 	move_speed = world.time - l_move_time
@@ -373,6 +378,7 @@
 
 /atom/movable/proc/onTransitZ(old_z,new_z)
 	GLOB.z_moved_event.raise_event(src, old_z, new_z)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_z, new_z)
 	for(var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
 		var/atom/movable/AM = item
 		AM.onTransitZ(old_z,new_z)

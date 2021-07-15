@@ -306,7 +306,7 @@
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
-obj/machinery/door/blast/regular
+/obj/machinery/door/blast/regular
 	icon_state_open = "pdoor0"
 	icon_state_opening = "pdoorc0"
 	icon_state_closed = "pdoor1"
@@ -314,7 +314,7 @@ obj/machinery/door/blast/regular
 	icon_state = "pdoor1"
 	maxhealth = 600
 
-obj/machinery/door/blast/regular/open
+/obj/machinery/door/blast/regular/open
 	icon_state = "pdoor0"
 	density = 0
 	opacity = 0
@@ -331,7 +331,7 @@ obj/machinery/door/blast/regular/open
 
 // SUBTYPE: Transparent
 // Not technically a blast door but operates like one. Allows air and light.
-obj/machinery/door/blast/gate
+/obj/machinery/door/blast/gate
 	name = "thick gate"
 	icon_state_open = "tshutter0"
 	icon_state_opening = "tshutterc0"
@@ -344,7 +344,7 @@ obj/machinery/door/blast/gate
 	opacity = 0
 	istransparent = 1
 
-obj/machinery/door/blast/gate/open
+/obj/machinery/door/blast/gate/open
 	icon_state = "tshutter0"
 	density = 0
 
@@ -404,6 +404,13 @@ obj/machinery/door/blast/gate/open
 	icon_state_closing = "closing"
 	icon_state = "closed"
 
+/obj/machinery/door/blast/multi_tile/four_tile_ver_sec
+	icon = 'icons/obj/doors/1x4blast_vert_sec.dmi'
+	bound_height = 128
+	width = 4
+	dir = NORTH
+	autoclose = TRUE
+
 /obj/machinery/door/blast/multi_tile/four_tile_ver
 	icon = 'icons/obj/doors/1x4blast_vert.dmi'
 	bound_height = 128
@@ -421,6 +428,13 @@ obj/machinery/door/blast/gate/open
 	bound_height = 64
 	width = 2
 	dir = NORTH
+
+/obj/machinery/door/blast/multi_tile/four_tile_hor_sec
+	icon = 'icons/obj/doors/1x4blast_hor_sec.dmi'
+	bound_width = 128
+	width = 4
+	dir = EAST
+	autoclose = TRUE
 
 /obj/machinery/door/blast/multi_tile/four_tile_hor
 	icon = 'icons/obj/doors/1x4blast_hor.dmi'

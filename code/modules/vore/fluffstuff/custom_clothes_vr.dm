@@ -182,7 +182,7 @@
 	icon = 'icons/vore/custom_clothes_vr.dmi'
 	icon_state = "solara_dress"
 
-	icon_override = 'icons/mob/uniform.dmi'
+	icon_override = 'icons/inventory/uniform/mob.dmi'
 	item_state = "solara_dress"
 
 //For general use
@@ -698,10 +698,10 @@
 	desc = " This is Lethe's Hat! A little tag attached inside reads: 'If found please return to Lethe! Or else!' It looks rather worn in. It also lacks armor."
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 
-	icon = 'icons/obj/clothing/hats.dmi'
+	icon = 'icons/inventory/head/item.dmi'
 	icon_state = "hoscap"
 
-	icon_override = 'icons/mob/head.dmi'
+	icon_override = 'icons/inventory/head/mob.dmi'
 	item_state = "hoscap"
 
 /obj/item/weapon/storage/belt/utility/fluff/vulpine
@@ -1763,13 +1763,13 @@ Departamental Swimsuits, for general use
 	item_state = "hasd_helm"
 	species_restricted = null
 
-	mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-		if(..())
-			if(H.ckey != "silencedmp5a5")
-				to_chat(H, "<span class='warning'>...The faceplate is clearly not made for your anatomy, thus, does not fit.</span>")
-				return 0
-			else
-				return 1
+/obj/item/clothing/head/helmet/space/void/security/hasd/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
+	if(..())
+		if(H.ckey != "silencedmp5a5")
+			to_chat(H, "<span class='warning'>...The faceplate is clearly not made for your anatomy, thus, does not fit.</span>")
+			return 0
+		else
+			return 1
 
 /obj/item/clothing/suit/space/void/security/hasd
 	name = "HASD EVA bodyplates"
@@ -1781,12 +1781,12 @@ Departamental Swimsuits, for general use
 	item_state = "hasd_suit"
 	pixel_x = -16
 
-	mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-		if(..() && istype(H) && H.ckey == "silencedmp5a5")
-			return 1
-		else
-			to_chat(H, "<span class='warning'>This suit is not designed for you.</span>")
-			return 0
+/obj/item/clothing/suit/space/void/security/hasd/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
+	if(..() && istype(H) && H.ckey == "silencedmp5a5")
+		return 1
+	else
+		to_chat(H, "<span class='warning'>This suit is not designed for you.</span>")
+		return 0
 
 //Zigfe:Zaoozaoo Xrimxuqmqixzix
 /obj/item/clothing/head/fluff/zao
@@ -2123,7 +2123,7 @@ Departamental Swimsuits, for general use
 		user.visible_message("<span class='notice'>[user] harmlessly bops [target] with \the [src].</span>", \
 		"<span class='notice'>\The [src] harmlessly bops [target]. The hat seems... unwilling?</span>")
 	else
-		user.visible_message("<span class='notice'>\The [src] flops over [user]'s' head for a moment, but they seem alright.</span>", \
+		user.visible_message("<b>\The [src]</b> flops over [user]'s' head for a moment, but they seem alright.", \
 		"<span class='notice'>\The [src] flops over your head for a moment, but you correct it without issue. There we go!</span>")
 
 /obj/item/clothing/head/fluff/nikki/proc/hat_warp_checks(var/mob/living/target, mob/user, proximity_flag)
@@ -2320,7 +2320,7 @@ Departamental Swimsuits, for general use
 			item_state = "rgb"
 			overlay_state = "rgb"
 			to_chat(user, "The polychromic plates in your cloak activate, turning it white.")
-		has_suit.update_clothing_icon()
+		has_suit?.update_clothing_icon()
 
 /obj/item/clothing/accessory/poncho/roles/cloak/fluff/cloakglowing/verb/color_verb()
 	set name = "Swap color"
