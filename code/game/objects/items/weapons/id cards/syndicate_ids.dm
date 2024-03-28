@@ -30,9 +30,11 @@
 	if(istype(O, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/I = O
 		src.access |= I.access
+		//CHOMPAdd Start Access restrictions
 		if(isrobot(user))
 			var/mob/living/silicon/robot/R = user
 			R.access_list |= I.access
+		//CHOMPAdd End
 		if(player_is_antag(user.mind) || registered_user == user)
 			to_chat(user, "<span class='notice'>The microscanner activates as you pass it over the ID, copying its access.</span>")
 
