@@ -124,9 +124,9 @@
 		attack_hand(user)
 
 /obj/machinery/door/airlock/attack_robot(var/mob/user)
-	var/mob/living/silicon/robot/R = user
 	if(!istype(R))
 		return //why are you here
+	var/mob/living/silicon/robot/R = user
 	if(check_access_list(R.access_list))
 		..()
 	else if(Adjacent(user))
