@@ -100,10 +100,9 @@
 	access_list = list()
 
 /obj/machinery/door/airlock/user_allowed(mob/user)
-	if(istype(user))
-		var/mob/living/silicon/robot/R = user
-		if(!check_access_list(R.access_list))
-			return FALSE
+	var/mob/living/silicon/robot/R = user
+	if(istype(R) && !check_access_list(R.access_list))
+		return FALSE
 	. = ..()
 
 /obj/machinery/computer/atmoscontrol/attack_robot(var/mob/user)
@@ -125,9 +124,9 @@
 		attack_hand(user)
 
 /obj/machinery/door/airlock/attack_robot(var/mob/user)
-	if(!istype(user))
-		return //why are you here
 	var/mob/living/silicon/robot/R = user
+	if(!istype(R))
+		return //why are you here
 	if(check_access_list(R.access_list))
 		..()
 	else if(Adjacent(user))
@@ -140,9 +139,9 @@
 		attack_hand(user)
 
 /obj/machinery/porta_turret/isLocked(mob/user)
-	if(!istype(user))
-		return ..()
 	var/mob/living/silicon/robot/R = user
+	if(!istype(R))
+		return ..()
 	if(!locked)
 		return FALSE
 	if(!check_access_list(R.access_list))
