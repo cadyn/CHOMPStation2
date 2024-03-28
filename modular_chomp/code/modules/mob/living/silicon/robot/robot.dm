@@ -6,14 +6,13 @@
 	vore_capacity_ex = list()
 	vore_fullness_ex = list()
 	vore_icon_bellies = list()
-	var/access_list = list()
-
-/mob/living/silicon/robot/init()
-	. = ..()
-	access_list = get_all_station_access().Copy() + access_synth
 
 /mob/living/silicon/robot/GetAccess()
-	return access_list
+	for(var/obj in target.contents)
+		if(istype(obj, /obj/item/weapon/card/id/synthetic))
+			var/obj/item/weapon/card/id/synthetic/card = obj
+			return card.access
+	return list()
 
 /mob/living/silicon/robot/verb/purge_nutrition()
 	set name = "Purge Nutrition"
