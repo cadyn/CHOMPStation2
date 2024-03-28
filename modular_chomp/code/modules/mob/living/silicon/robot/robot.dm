@@ -8,9 +8,6 @@
 	vore_icon_bellies = list()
 	var/access_list = list()
 
-/mob/living/silicon/robot/init_id()
-	return //Fuck you
-
 /mob/living/silicon/robot/init()
 	. = ..()
 	access_list = get_all_station_access().Copy() + access_synth
